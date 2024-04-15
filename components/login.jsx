@@ -16,7 +16,7 @@ const Login = ({ onLoginSuccess }) => {
 
       console.log(response.data);
 
-      // Verifica si la respuesta indica un inicio de sesión exitoso
+      // Verifica si la Respuesta Indica un Inicio de Sesión Exitoso
       if (response.data && response.data.entrada == true) {
         Alert.alert('Bienvenido!!', 'Inicio de sesión exitoso');
         onLoginSuccess(response.data.resultado); // Llama a la función proporcionada desde App.js con el resultado
