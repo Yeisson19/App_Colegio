@@ -1,0 +1,4 @@
+# context:
+ Esta carpeta generalmente contiene archivos relacionados con el manejo del estado global de la aplicación utilizando el Context API de React. En este directorio, podrías tener archivos que definan y exporten los contextos de la aplicación, así como también proveedores de contexto que envuelvan componentes de la interfaz de usuario con el contexto proporcionado. Esto facilita el acceso y la manipulación del estado global desde cualquier componente de la aplicación.
+
+El Context API de React es una característica que permite pasar datos a través del árbol de componentes sin necesidad de pasar props manualmente en cada nivel. Es especialmente útil para datos que son necesarios globalmente en toda la aplicación, como el estado de autenticación del usuario.

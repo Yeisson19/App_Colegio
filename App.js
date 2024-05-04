@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Login from './components/login';
-import Materia from './components/Materia';
+import Login from './src/screens/login';
+import Materia from './src/screens/Materia';
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

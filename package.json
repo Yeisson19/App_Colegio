@@ -17,8 +17,10 @@
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
     "react-native": "0.73.6",
+    "react-native-crypto-js": "^1.0.0",
     "react-native-elements": "^3.4.3",
-    "react-native-vector-icons": "^10.0.3"
+    "react-native-vector-icons": "^10.0.3",
+    "react-router": "^6.23.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

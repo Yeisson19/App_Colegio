@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, Text, View, StyleSheet, TouchableOpacity , RefreshControl } from "react-native";
 import axios from 'axios';
-import RepositoryItem from './RepositoryItem.jsx'
 import Constants from 'expo-constants'
 import { Ionicons } from '@expo/vector-icons';
+import RepositoryItem from '../components/RepositoryItem'
+import {BASE_URL} from '../services/url.jsx'
 
 const Materia = ({ userData, onLogout }) => {
   const [materias, setMaterias] = useState([]);
@@ -16,7 +17,7 @@ const Materia = ({ userData, onLogout }) => {
   const fetchData = async () => {
     try {
       setIsRefreshing(true);
-      const response = await axios.post('https://decorous-chin.000webhostapp.com/api/materia.php', {
+      const response = await axios.post(`${BASE_URL}/carlossoublette/api/mobile/materia.php`, {
         dato: userData
       });
       setMaterias(response.data);
