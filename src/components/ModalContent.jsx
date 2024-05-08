@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity, Modal, FlatList } from "react
 
 const ModalContent = ({ visible, onClose, id, materia, años, docenteNombreApellido }) => {
   const docentes = docenteNombreApellido.split(',');
-
+  
   return (
     <Modal visible={visible} transparent={true} animationType="slide" onRequestClose={onClose}>
       <View style={styles.modalContainer}>

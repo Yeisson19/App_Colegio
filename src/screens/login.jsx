@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, TextInput, Button, Alert, StyleSheet, Text, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
-import {validateUsername, validatePassword} from '../utils/validator/validacion.jsx';
+import validationComplete from '../utils/validator/validationUtils.jsx';
 import {BASE_URL} from '../services/url.jsx'
 // import LoginValidation from '../validator/validacion.jsx';
 // import CryptoJS from 'react-native-crypto-js';
@@ -12,38 +12,18 @@ const Login = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  var msj;
-  // const { username: usernameError, password: passwordError } = LoginValidation({ username, password });
-
-  function validacion() {
-      // Verificar la validación del formulario
-  const isUsernameValid = validateUsername(username);
-  const isPasswordValid = validatePassword(password);
-  // Verificar si hay errores de validación
-  if (!isUsernameValid || !isPasswordValid) {
-    // Mostrar mensajes de error de validación
-    if (!isUsernameValid && !isPasswordValid) {
-      msj= 'El formato del usuario y la contraseña no son correctos.';
-    } else if (!isUsernameValid) {
-      msj= 'El formato del usuario no es correcto.';
-    } else {
-      msj='El formato de la contraseña no es correcto.';
-    }
-    return false; // Detener el proceso de inicio de sesión si hay errores de validación
-    }
-    return true;
-  }
 
 
   const handleLogin = async () => {
 
     try {
-      
-      if (!validacion()) throw new Error(msj);
       setIsLoading(true);  
 
+      const validationResult = validationComplete(username, password); // Usa la función de validación
+      if (!validationResult.isValid) throw new Error(validationResult.errorMessage);
+
         // Realizar la solicitud de inicio de sesión
-        const response = await axios.post(`${BASE_URL}/carlossoublette/api/login.php`, {
+        const response = await axios.post(`${BASE_URL}/api/login.php`, {
           user: username,
           password: password
       });
@@ -58,11 +38,8 @@ const Login = ({ onLoginSuccess }) => {
         }
 
     } catch (error) {
-      if (!validacion()){Alert.alert('Error', msj); }
-      else{
-            console.error('Error de inicio de sesión:', error.message);
-            Alert.alert('Error', 'Inicio de sesión fallido. Verifica tus credenciales.');
-        }
+      console.error('Error de inicio de sesión:', error.message);
+      Alert.alert('Error', 'Inicio de sesión fallido. Verifica tus credenciales.');
     }
 
     setIsLoading(false);

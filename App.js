@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Login from './src/screens/login';
-import Materia from './src/screens/Materia';
+import Nav_Drawer from './src/Routes/navegation';
+import { NavigationContainer } from "@react-navigation/native";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -12,17 +13,19 @@ export default function App() {
     setUserData(result);
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
+  const handleLogout = () => { 
+    setIsLoggedIn(false); 
+    console.log(isLoggedIn);
   };
 
   return (
-    <View style={styles.container}>
-      {isLoggedIn ? <Materia userData={userData} onLogout={handleLogout} /> : <Login onLoginSuccess={onLoginSuccess} />}
-    </View>
+    <NavigationContainer>
+      {isLoggedIn ? <Nav_Drawer userData={userData} onLogout={handleLogout} /> : <Login onLoginSuccess={onLoginSuccess} />}
+      </NavigationContainer>
   );
 }
 
+{/* <Materia userData={userData} onLogout={handleLogout} /> */}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
