@@ -1,15 +1,13 @@
 import { JSEncrypt } from 'jsencrypt';
-import  { publicKey }  from './key/public.jsx';
-import  { privateKey }  from './key/private';
+import  publicKey   from './key/public.jsx';
+import  privateKey  from './key/private';
 
 // Crea una instancia de JSEncrypt
 const rsa = new JSEncrypt();
 // Función para encriptar un objeto
 export const Encriptar = (data) => {
     try {
-        // const resultado=rsa.setPublicKey(publicKey);
         rsa.setPublicKey(publicKey);
-        // console.log(resultado);
         const encrypted = rsa.encrypt(data);
         return encrypted;
     } catch (error) {

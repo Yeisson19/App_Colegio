@@ -21,14 +21,15 @@ const Login = ({ onLoginSuccess }) => {
       const validationResult = validationComplete(username, password); // Usa la función de validación
       if (!validationResult.isValid) throw new Error(validationResult.errorMessage);
         
-      // const encryptedUsername = Encriptar(username);
-      // const encryptedPassword = Encriptar(password);
+      const encryptedUsername = Encriptar(username);
+      const encryptedPassword = Encriptar(password);
+      console.log(encryptedUsername);
+      console.log(encryptedPassword);
       
-
-        // Realizar la solicitud de inicio de sesión
+      // Realizar la solicitud de inicio de sesión
         const response = await axios.post(`${BASE_URL}/api/login.php`, {
-          user: username,
-          password: password
+          user: encryptedUsername,
+          password: encryptedPassword
       });
  
         console.log(response.data);
