@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Alert, StyleSheet, Text, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
-import validationComplete from '../utils/validator/validationUtils.jsx';
+import validationComplete from '../utils/validator/validationUtils.jsx'; 
 import {BASE_URL} from '../services/url.jsx'
-// import LoginValidation from '../validator/validacion.jsx';
-// import CryptoJS from 'react-native-crypto-js';
+import { Encriptar, Desencriptar} from '../auth/authentication.jsx';
  
 
 const Login = ({ onLoginSuccess }) => {
@@ -21,6 +20,10 @@ const Login = ({ onLoginSuccess }) => {
 
       const validationResult = validationComplete(username, password); // Usa la función de validación
       if (!validationResult.isValid) throw new Error(validationResult.errorMessage);
+        
+      // const encryptedUsername = Encriptar(username);
+      // const encryptedPassword = Encriptar(password);
+      
 
         // Realizar la solicitud de inicio de sesión
         const response = await axios.post(`${BASE_URL}/api/login.php`, {
