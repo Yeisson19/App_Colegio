@@ -8,7 +8,7 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons'; // Importa el ícono
 import Screen1 from '../screens/Home';
 import Screen2 from '../screens/Prueba';
 import Materia from '../screens/Materia';
-
+import horario from '../screens/horario';
 const Drawer = createDrawerNavigator();
 
 const Nav_Drawer = ({ userData, onLogout }) => {
@@ -20,6 +20,11 @@ const Nav_Drawer = ({ userData, onLogout }) => {
       <Drawer.Screen 
         name="Materia" 
         component={Materia} 
+        initialParams={{ userData }} // Pasar solo userData
+      />
+      <Drawer.Screen 
+        name="Horario" 
+        component={horario} 
         initialParams={{ userData }} // Pasar solo userData
       />
 
