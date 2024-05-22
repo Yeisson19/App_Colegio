@@ -8,11 +8,14 @@ import {BASE_URL} from '../services/url.jsx'
 import { useRoute } from '@react-navigation/native';
 
 
+
 const Materia = ({ route }) => {
   // const route = useRoute();
   const  userData  = route.params;
   const [materias, setMaterias] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  console.log("sdfsdf");
 
   useEffect(() => {
     fetchData();
