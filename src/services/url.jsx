@@ -1,0 +1,1 @@
+export const BASE_URL= 'https://dc14-181-208-46-146.ngrok-free.app/carlossoublette';
