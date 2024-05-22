@@ -15,8 +15,7 @@ const Materia = ({ route }) => {
   const [materias, setMaterias] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  console.log("sdfsdf");
-
+  
   useEffect(() => {
     fetchData();
   }, [userData]);
