@@ -30,7 +30,7 @@ const Nav_Drawer = ({ userData, onLogout }) => {
       />
       <Drawer.Screen 
         name="Pagos" 
-        component={horario} 
+        component={Pagos} 
         initialParams={{ userData }} // Pasar solo userData
       />
 
