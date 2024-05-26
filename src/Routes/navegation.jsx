@@ -9,6 +9,7 @@ import Screen1 from '../screens/Home';
 import Screen2 from '../screens/Prueba';
 import Materia from '../screens/Materia';
 import horario from '../screens/horario';
+import Pagos from '../screens/Pagos';
 const Drawer = createDrawerNavigator();
 
 const Nav_Drawer = ({ userData, onLogout }) => {
@@ -24,6 +25,11 @@ const Nav_Drawer = ({ userData, onLogout }) => {
       />
       <Drawer.Screen 
         name="Horario" 
+        component={horario} 
+        initialParams={{ userData }} // Pasar solo userData
+      />
+      <Drawer.Screen 
+        name="Pagos" 
         component={horario} 
         initialParams={{ userData }} // Pasar solo userData
       />
