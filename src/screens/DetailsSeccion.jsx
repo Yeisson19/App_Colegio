@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet ,ScrollView} from 'react-native';
+import MyComponent from '../components/Table_Students';
 
 const DetailsScreen = ({ route }) => {
   const { seccion } = route.params;
 
   return (
-    <View style={styles.container}>
+  <ScrollView>
+        <View style={styles.container}>
       <Text style={styles.title}>Detalles de la Sección</Text>
       <Text style={styles.label}>ID: {seccion.id}</Text>
       <Text style={styles.label}>Sección: {seccion.secciones}</Text>
@@ -15,8 +17,12 @@ const DetailsScreen = ({ route }) => {
       <Text style={styles.label}>Docente Guía: {seccion.docente_guia}</Text>
       <Text style={styles.label}>Año Académico: {seccion.ano_academico}</Text>
       <Text style={styles.label}>Cantidad de Estudiantes: {seccion.cantidad_estudiantes}</Text>
+
+      <MyComponent />
     </View>
+  </ScrollView>
   );
+
 };
 
 const styles = StyleSheet.create({

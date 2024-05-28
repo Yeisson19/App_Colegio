@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet} from 'react-native';
-import Login from './src/screens/login'; // Asegúrate de que la ruta sea correcta
-import SeccionStack from './src/Routes/navegation';
+import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
+
+import Login from './src/screens/login'; 
+import SeccionStack from './src/Routes/navegation';
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);//variable de login
@@ -20,6 +22,7 @@ export default function App() {
   };
 
   return (
+    <PaperProvider>
     <NavigationContainer>
       {isLoggedIn ? (
         <SeccionStack userData={userData} onLogout={handleLogout} />
@@ -27,6 +30,7 @@ export default function App() {
         <Login onLoginSuccess={onLoginSuccess} />
       )}
     </NavigationContainer>
+    </PaperProvider>
   );
 }
 
