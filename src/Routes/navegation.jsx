@@ -1,60 +1,103 @@
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
-import { createDrawerNavigator,DrawerItem } from '@react-navigation/drawer';
-import { useNavigation} from '@react-navigation/native';
-import { FontAwesome, Ionicons } from '@expo/vector-icons'; // Importa el ícono de FontAwesome
+import { Button } from 'react-native';
+import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons'; // Importa el ícono de Ionicons
 
 // Screens
-import Screen1 from '../screens/Home';
-import Screen2 from '../screens/Prueba';
+import Home from '../screens/Home';
 import Materia from '../screens/Materia';
+import Seccion from '../screens/Seccion';
 import horario from '../screens/horario';
-const Drawer = createDrawerNavigator();
+import Pagos from '../screens/Pagos';
+//Sub-Screen
+import DetailsScreen from '../screens/DetailsSeccion';
 
-const Nav_Drawer = ({ userData, onLogout }) => {
+const Drawer = createDrawerNavigator();//nav Screens
+const Stack = createNativeStackNavigator();//nav Sub-Screen
+
+const NavDrawer = ({ userData, navigation }) => {
+
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button
+          onPress={() => navigation.navigate('CerrarSesion')}
+          title="Cerrar sesión"
+          color="#000"
+        />
+      ),
+    });
+  }, [navigation]);
 
   return (
-    <Drawer.Navigator initialRouteName="Home">
-      <Drawer.Screen name="Home" component={Screen1} />
-      <Drawer.Screen name="Screen2" component={Screen2} />
+    <Drawer.Navigator initialRouteName="Seccion">
+      <Drawer.Screen name="HomeScreen" component={Home} />
       <Drawer.Screen 
-        name="Materia" 
+        name="MateriaScreen" 
         component={Materia} 
-        initialParams={{ userData }} // Pasar solo userData
+        initialParams={{ userData }} 
       />
       <Drawer.Screen 
-        name="Horario" 
+        name="SeccionScreen" 
+        component={Seccion} 
+        options={{ title: 'Seccion' }}
+      />
+      <Drawer.Screen 
+        name="HorarioScreen" 
         component={horario} 
         initialParams={{ userData }} // Pasar solo userData
       />
-
-      
-        <Drawer.Screen
+      <Drawer.Screen 
+        name="PagosScreen" 
+        component={Pagos} 
+        initialParams={{ userData }} // Pasar solo userData
+      />
+      <Drawer.Screen
         name="CerrarSesion"
         options={{
           title: 'Cerrar sesión',
           drawerIcon: ({ focused, color, size }) => (
             <Ionicons
-            name="power"
-            size={size}
-            color={color}
+              name="power"
+              size={size}
+              color={color}
             />
           ),
         }}
-        >
-        {() => (
-          <DrawerItem
-          label="Cerrar sesión"
-          onPress={onLogout}
-          />
-        )}
-      </Drawer.Screen>
-
-
-       
+        component={LogoutScreen}
+      />
     </Drawer.Navigator>
   );
-}
+};
 
+const LogoutScreen = ({ navigation }) => {
+  return (
+    <DrawerItem
+      label="Cerrar sesión"
+      onPress={() => navigation.navigate('CerrarSesion')}
+    />
+  );
+};
 
-export default Nav_Drawer;
+const SeccionStack = ({ userData }) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={NavDrawer}
+        options={{ headerShown: false }}
+        initialParams={{ userData }}
+      />
+      <Stack.Screen 
+        name="Details" 
+        component={DetailsScreen} 
+        options={({ route }) => ({
+          title: `Detalles de la Sección ${route.params.seccion.secciones}`
+        })}
+      />
+    </Stack.Navigator>
+  );
+};
+
+export default SeccionStack;

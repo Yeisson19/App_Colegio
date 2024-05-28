@@ -1,0 +1,107 @@
+[
+    {
+      "id": 30,
+      "id_secciones": 3,
+      "secciones": "C",
+      "cantidad": 25,
+      "id_anos": 4,
+      "año": "4",
+      "turnos": "tarde",
+      "docente_guia": "Laura Martínez",
+      "id_ano_academico": 1,
+      "ano_academico": "2023-2024",
+      "cantidad_estudiantes": 2
+    },
+    {
+      "id": 36,
+      "id_secciones": 5,
+      "secciones": "E",
+      "cantidad": 25,
+      "id_anos": 2,
+      "año": "2",
+      "turnos": "mañana",
+      "docente_guia": "Laura Martínez",
+      "id_ano_academico": 1,
+      "ano_academico": "2023-2024",
+      "cantidad_estudiantes": 0
+    },
+    {
+      "id": 38,
+      "id_secciones": 2,
+      "secciones": "B",
+      "cantidad": 25,
+      "id_anos": 2,
+      "año": "2",
+      "turnos": "mañana",
+      "docente_guia": "Antonio Gómez",
+      "id_ano_academico": 1,
+      "ano_academico": "2023-2024",
+      "cantidad_estudiantes": 0
+    },
+    {
+      "id": 39,
+      "id_secciones": 4,
+      "secciones": "D",
+      "cantidad": 20,
+      "id_anos": 1,
+      "año": "1",
+      "turnos": "tarde",
+      "docente_guia": "Carlos Fernández",
+      "id_ano_academico": 1,
+      "ano_academico": "2023-2024",
+      "cantidad_estudiantes": 0
+    },
+    {
+      "id": 40,
+      "id_secciones": 3,
+      "secciones": "C",
+      "cantidad": 20,
+      "id_anos": 3,
+      "año": "3",
+      "turnos": "mañana",
+      "docente_guia": "Antonio Gómez",
+      "id_ano_academico": 1,
+      "ano_academico": "2023-2024",
+      "cantidad_estudiantes": 0
+    },
+    {
+      "id": 41,
+      "id_secciones": 2,
+      "secciones": "B",
+      "cantidad": 20,
+      "id_anos": 1,
+      "año": "1",
+      "turnos": "tarde",
+      "docente_guia": "Carlos Fernández",
+      "id_ano_academico": 1,
+      "ano_academico": "2023-2024",
+      "cantidad_estudiantes": 0
+    },
+    {
+      "id": 42,
+      "id_secciones": 3,
+      "secciones": "C",
+      "cantidad": 20,
+      "id_anos": 1,
+      "año": "5",
+      "turnos": "tarde",
+      "docente_guia": "Carlos Fernández",
+      "id_ano_academico": 1,
+      "ano_academico": "2023-2024",
+      "cantidad_estudiantes": 0
+    },
+    {
+      "id": 43,
+      "id_secciones": 2,
+      "secciones": "B",
+      "cantidad": 20,
+      "id_anos": 1,
+      "año": "5",
+      "turnos": "tarde",
+      "docente_guia": "Carlos Fernández",
+      "id_ano_academico": 1,
+      "ano_academico": "2023-2024",
+      "cantidad_estudiantes": 0
+    }
+  ]
+  
