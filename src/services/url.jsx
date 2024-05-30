@@ -1,1 +1,1 @@
-export const BASE_URL= 'https://2270-38-137-176-211.ngrok-free.app/Nueva%20carpeta%20(3)/carlossoublette/';
+export const BASE_URL= 'https://890f-181-208-46-146.ngrok-free.app/carlossoublette'; 

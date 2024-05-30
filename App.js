@@ -1,35 +1,37 @@
-import React, { useState } from 'react';
-import { StyleSheet} from 'react-native';
+import React, { useContext } from 'react';
+import { StyleSheet } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
+import { AuthProvider, AuthContext } from './src/context/AuthContext';
 
-import Login from './src/screens/login'; 
+import Login from './src/screens/login';
 import SeccionStack from './src/Routes/navegation';
 
-export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);//variable de login
-  const [userData, setUserData] = useState(null);//Datos User
-
-  //Inicia Seccion
-  const onLoginSuccess = (result) => {
-    setIsLoggedIn(true);
-    setUserData(result);
-  };
-  //Cierra Seccion
-  const handleLogout = () => { 
-    setIsLoggedIn(false); 
-    console.log(isLoggedIn);
-  };
+const Main = () => {
+  const { token } = useContext(AuthContext);
 
   return (
-    <PaperProvider>
-    <NavigationContainer>
-      {isLoggedIn ? (
-        <SeccionStack userData={userData} onLogout={handleLogout} />
+    <>
+      {token ? (
+        <SeccionStack />
       ) : (
-        <Login onLoginSuccess={onLoginSuccess} />
+        <Login />
       )}
-    </NavigationContainer>
+    </>
+  );
+};
+
+export default function App() {
+  return (
+    //<PaperProvider> para que funcione los componenetes de 'react-native-paper'
+     // <AuthProvider> para que funciones la logica del token en /context/AuthContext 
+      //  <NavigationContainer> importante para que la navegacion se vea
+    <PaperProvider>
+      <AuthProvider>
+        <NavigationContainer>
+          <Main />
+        </NavigationContainer>
+      </AuthProvider>
     </PaperProvider>
   );
 }
