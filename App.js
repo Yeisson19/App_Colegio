@@ -7,7 +7,7 @@ import Login from './src/screens/login';
 import SeccionStack from './src/Routes/navegation';
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);//variable de login
+  const [isLoggedIn, setIsLoggedIn] = useState(false);//variable de login
   const [userData, setUserData] = useState(null);//Datos User
 
   //Inicia Seccion

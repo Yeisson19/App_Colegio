@@ -10,6 +10,7 @@ import Materia from '../screens/Materia';
 import Seccion from '../screens/Seccion';
 import horario from '../screens/horario';
 import Pagos from '../screens/Pagos';
+import Inscripciones from '../screens/inscripciones';
 //Sub-Screen
 import DetailsScreen from '../screens/DetailsSeccion';
 
@@ -51,6 +52,11 @@ const NavDrawer = ({ userData, navigation }) => {
       <Drawer.Screen 
         name="PagosScreen" 
         component={Pagos} 
+        initialParams={{ userData }} // Pasar solo userData
+      />
+      <Drawer.Screen 
+        name="InscripcionesScreen" 
+        component={Inscripciones} 
         initialParams={{ userData }} // Pasar solo userData
       />
       <Drawer.Screen
