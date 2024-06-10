@@ -82,7 +82,7 @@ const NavDrawer = () => {
         options={{ title: 'Seccion' }}
       />
       <Drawer.Screen 
-        name="HorarioScreen" 
+        name="Horario" 
         component={horario} 
         // initialParams={{ userData }} // Pasar solo userData
       />
@@ -92,13 +92,8 @@ const NavDrawer = () => {
         // initialParams={{ userData }} // Pasar solo userData
       />
       <Drawer.Screen 
-        name="InscripcionesScreen" 
+        name="Inscripciones" 
         component={Inscripciones} 
-        // initialParams={{ userData }} // Pasar solo userData
-      />
-      <Drawer.Screen 
-        name="Pagos" 
-        component={Pagos} 
         // initialParams={{ userData }} // Pasar solo userData
       />
       <Drawer.Screen
