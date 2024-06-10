@@ -96,6 +96,11 @@ const NavDrawer = () => {
         component={Inscripciones} 
         // initialParams={{ userData }} // Pasar solo userData
       />
+      <Drawer.Screen 
+        name="Pagos" 
+        component={Pagos} 
+        // initialParams={{ userData }} // Pasar solo userData
+      />
       <Drawer.Screen
         name="CerrarSesion"
         options={{
