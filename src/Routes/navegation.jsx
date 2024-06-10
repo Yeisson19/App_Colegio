@@ -87,7 +87,7 @@ const NavDrawer = () => {
         // initialParams={{ userData }} // Pasar solo userData
       />
       <Drawer.Screen 
-        name="PagosScreen" 
+        name="Pagos" 
         component={Pagos} 
         // initialParams={{ userData }} // Pasar solo userData
       />
