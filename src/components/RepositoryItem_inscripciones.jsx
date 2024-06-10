@@ -17,15 +17,15 @@ const RepositoryItem_inscripciones = (props) => {
     <TouchableOpacity onPress={handlePress}>
       <View key={props.id_deudas} style={styles.container}>
         <View style={styles.row}>
-          <Text style={styles.label}>ID:</Text>
+          <Text style={styles.label}>Nombre:</Text>
           <Text style={styles.text}>{props.nombre}</Text>
         </View>
         <View style={styles.row}>
-          <Text style={styles.label}>Ref:</Text>
+          <Text style={styles.label}>Apellido:</Text>
           <Text style={styles.text}>{props.apellido}</Text>
         </View>
         <View style={styles.row}>
-          <Text style={styles.label}>Monto:</Text>
+          <Text style={styles.label}>Edad:</Text>
           <Text style={styles.text}>{props.edad}</Text>
         </View>
       </View>
