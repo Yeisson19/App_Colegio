@@ -42,10 +42,10 @@ const RepositoryItem_ano_academico = (props) => {
       visible={modalVisible}
       onClose={handleCloseModal}
       id={props.id}
-      inicio={props.fecha_ini}
-      fin={props.fecha_cierr}
-      ano={props.ano_academico}
-      estado={props.estatus}
+      fecha_ini={props.fecha_ini}
+      fecha_cierr={props.fecha_cierr}
+      ano_academico={props.ano_academico}
+      estatus={props.estatus}
       
     />
   </TouchableOpacity>

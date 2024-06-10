@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity, Modal} from "react-native";
 
 
-const ModalContent_ano_academico = ({ visible, onClose, id, inicio, fin, ano, estado}) => {
+const ModalContent_ano_academico = ({ visible, onClose, id, fecha_ini, fecha_cierr, ano_academico, estatus}) => {
   
 
   return (
@@ -16,20 +16,20 @@ const ModalContent_ano_academico = ({ visible, onClose, id, inicio, fin, ano, es
             <Text style={styles.text}>{id}</Text>
           </View>
           <View style={styles.row}>
-            <Text style={styles.label}>inicio:</Text>
-            <Text style={styles.text}>{inicio}</Text>
+            <Text style={styles.label}>INICIO:</Text>
+            <Text style={styles.text}>{fecha_ini}</Text>
           </View>
           <View style={styles.row}>
-            <Text style={styles.label}>fin:</Text>
-            <Text style={styles.text}>{fin}</Text>
+            <Text style={styles.label}>FIN:</Text>
+            <Text style={styles.text}>{fecha_cierr}</Text>
           </View>
           <View style={styles.row}>
-            <Text style={styles.label}>ano:</Text>
-            <Text style={styles.text}>{ano}</Text>
+            <Text style={styles.label}>ANO:</Text>
+            <Text style={styles.text}>{ano_academico}</Text>
           </View>
           <View style={styles.row}>
-            <Text style={styles.label}>estado:</Text>
-            <Text style={styles.text}>{estado}</Text>
+            <Text style={styles.label}>ESTADO:</Text>
+            <Text style={styles.text}>{estatus}</Text>
           </View>
           
           
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
-  modalContent: {
+  ModalContent: {
     backgroundColor: 'white',
     padding: 20,
     borderRadius: 10,

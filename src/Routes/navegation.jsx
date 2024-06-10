@@ -12,6 +12,8 @@ import Seccion from '../screens/Seccion';
 import horario from '../screens/horario';
 import Pagos from '../screens/Pagos';
 import Inscripciones from '../screens/inscripciones';
+import Ano_academico from '../screens/ano_academico';
+
 
 //Sub-Screen
 import DetailsScreen from '../screens/DetailsSeccion';
@@ -94,6 +96,11 @@ const NavDrawer = () => {
       <Drawer.Screen 
         name="InscripcionesScreen" 
         component={Inscripciones} 
+        // initialParams={{ userData }} // Pasar solo userData
+      />
+      <Drawer.Screen 
+        name="AñoScreen" 
+        component={Ano_academico} 
         // initialParams={{ userData }} // Pasar solo userData
       />
       <Drawer.Screen
