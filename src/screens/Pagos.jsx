@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext  } from "react";
 import { FlatList, Text, View, StyleSheet, TouchableOpacity , RefreshControl } from "react-native";
 import axios from 'axios';
 import Constants from 'expo-constants'
@@ -18,7 +18,7 @@ const Pagos = () => {
   const fetchData = async () => {
     try {
       setIsRefreshing(true);
-      const response = await axios.post(`${BASE_URL}/api/mobile/horario.php`, {
+      const response = await axios.post(`${BASE_URL}/api/mobile/pagos.php`, {
         token: token
       });
 
@@ -64,6 +64,5 @@ const Pagos = () => {
     </View>
   );
 };
-
 
 export default Pagos;
