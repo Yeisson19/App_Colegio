@@ -72,7 +72,9 @@ const NavDrawer = () => {
   //-----------------------------------------
 
   return (
-    <Drawer.Navigator initialRouteName="Seccion">
+    <Drawer.Navigator 
+    // initialRouteName="Seccion"
+    >
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen 
         name="Materia" 
@@ -129,7 +131,7 @@ const SeccionStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Home"
+        name="NavDrawer"
         component={NavDrawer}
         options={{ headerShown: false }}
       />

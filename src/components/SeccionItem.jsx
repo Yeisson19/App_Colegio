@@ -7,7 +7,7 @@ const SeccionItem = ({ seccion, onPressSeccion}) => {
   return (
     <TouchableOpacity  onPress={() => onPressSeccion(seccion)}>
       <View style={styles.container}>
-        <View style={styles.row}>
+        <View style={styles.row}> 
           <Text style={styles.label}>ID:</Text>
           <Text style={styles.text}>{seccion.id}</Text>
         </View>

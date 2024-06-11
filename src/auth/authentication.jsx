@@ -21,7 +21,7 @@ export const Desencriptar  = (encryptedData) => {
     try {
         rsa.setPrivateKey(privateKey);
         const decrypted = rsa.decrypt(encryptedData);
-        return JSON.parse(decrypted);
+        return decrypted; 
     } catch (error) {
         console.error('Error al desencriptar el objeto:', error);
         return null;

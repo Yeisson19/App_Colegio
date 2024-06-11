@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { List } from 'react-native-paper';
 import SeccionItem from './SeccionItem';
-
+ 
 const List_Year = ({ secciones, onPressSeccion }) => {
  
   // Filtrar secciones por año
@@ -15,7 +15,7 @@ const List_Year = ({ secciones, onPressSeccion }) => {
       <SeccionItem key={seccion.id} seccion={seccion} onPressSeccion={onPressSeccion} />
     ));
   };
-
+ 
   return (
     <List.Section title="Año Académico 2023-2024">
       <List.Accordion
