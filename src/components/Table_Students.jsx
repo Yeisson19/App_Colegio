@@ -1,23 +1,50 @@
-import * as React from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import React, { useEffect, useState, useContext } from 'react';
+import { ScrollView, StyleSheet, Text, Alert } from 'react-native';
 import { DataTable } from 'react-native-paper';
-import data from '../services/data';
+import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
+import { BASE_URL } from '../services/url.jsx';
 
-const MyComponent = () => {
-  const [page, setPage] = React.useState(0);
-  const [numberOfItemsPerPageList] = React.useState([2, 3, 4, 5, 6]);
-  const [itemsPerPage, onItemsPerPageChange] = React.useState(
-    numberOfItemsPerPageList[2]
-  );
+const Tabla_Students = ({ seccion_id }) => {
+  const [page, setPage] = useState(0);
+  const [numberOfItemsPerPageList] = useState([5, 10, 15, 25]);
+  const [itemsPerPage, setItemsPerPage] = useState(numberOfItemsPerPageList[1]);
+  const [students, setStudents] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const { token } = useContext(AuthContext);
 
-  const [items] = React.useState(data);
+  const fetchData = async () => {
+    try {
+      setIsRefreshing(true);
+      const response = await axios.post(`${BASE_URL}/api/mobile/seccion.php`, {
+        token: token, 
+        request: "estudiantes",
+        id: seccion_id
+      });
 
-  const from = page * itemsPerPage;
-  const to = Math.min((page + 1) * itemsPerPage, items.length);
+      // console.log("response.data: ", response.data);
+      if (response.data.success && Array.isArray(response.data.resultado)) {
+        setStudents(response.data.resultado);
+      } else {
+        Alert.alert('Error', response.data.msg || 'Error al obtener datos');
+      }
+    } catch (error) {
+      console.error('Error: ', error.message);
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
 
-  React.useEffect(() => {
+  useEffect(() => {
+    fetchData();
+  }, [token]);
+
+  useEffect(() => {
     setPage(0);
   }, [itemsPerPage]);
+
+  const from = page * itemsPerPage;
+  const to = Math.min((page + 1) * itemsPerPage, students.length);
 
   return (
     <ScrollView horizontal>
@@ -30,7 +57,7 @@ const MyComponent = () => {
           <DataTable.Title style={styles.Column}><Text>Observaciones</Text></DataTable.Title>
         </DataTable.Header>
 
-        {items.slice(from, to).map((item) => (
+        {students.slice(from, to).map((item) => (
           <DataTable.Row key={item.cedula}>
             <DataTable.Cell style={styles.row}><Text>{item.cedula}</Text></DataTable.Cell>
             <DataTable.Cell style={styles.row}><Text>{item.nombre}</Text></DataTable.Cell>
@@ -42,12 +69,12 @@ const MyComponent = () => {
 
         <DataTable.Pagination
           page={page}
-          numberOfPages={Math.ceil(items.length / itemsPerPage)}
+          numberOfPages={Math.ceil(students.length / itemsPerPage)}
           onPageChange={(page) => setPage(page)}
-          label={`${from + 1}-${to} of ${items.length}`}
+          label={`${from + 1}-${to} of ${students.length}`}
           numberOfItemsPerPageList={numberOfItemsPerPageList}
           numberOfItemsPerPage={itemsPerPage}
-          onItemsPerPageChange={onItemsPerPageChange}
+          onItemsPerPageChange={setItemsPerPage}
           showFastPaginationControls
           selectPageDropdownLabel={'Rows per page'}
         />
@@ -59,15 +86,13 @@ const MyComponent = () => {
 const styles = StyleSheet.create({
   Column: {
     maxWidth: 80,
-    justifyContent: 'center', // Alineación vertical centrada
+    justifyContent: 'center',
   },
   row: {
     maxWidth: 80,
     overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    justifyContent: 'center', // Alineación vertical centrada
+    justifyContent: 'center',
   },
 });
 
-export default MyComponent;
+export default Tabla_Students;

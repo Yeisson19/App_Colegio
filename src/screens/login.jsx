@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 import validationComplete from '../utils/validator/validationUtils.jsx'; 
 import { BASE_URL } from '../services/url.jsx';
-import { Encriptar } from '../auth/authentication.jsx';
+import { Desencriptar, Encriptar } from '../auth/authentication.jsx';
 import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
@@ -29,9 +29,17 @@ const Login = () => {
         password: encryptedPassword
       });
 
-      if (response.data && response.data.entrada && response.data.token) {
+        // Maneja la respuesta del servidor
+        console.log(response.data);
+
+        // Desencriptar los datos recibidos
+        const entrada = Desencriptar(response.data.entrada);
+        const token = Desencriptar(response.data.token);
+    
+    // Aquí tienes los datos desencriptados
+    if (entrada && token) {
         Alert.alert('¡Bienvenido!', 'Inicio de sesión exitoso');
-        saveAuthToken(response.data.token);
+        saveAuthToken(token);
       } else {
         console.warn(response.data.msg);
       }
@@ -53,14 +61,15 @@ const Login = () => {
             style={styles.input}
             placeholder="Usuario"
             value={username}
-            onChangeText={(text) => {
-              if (text.length <= 10) {
-                const isValid = /^[0-9A-Za-z\u002A\u002E\u00F1\u00D1\u00D1\u00F1]*$/.test(text);
-                if (isValid) {
-                  setUsername(text);
-                }
-              }
-            }}
+            onChangeText={setUsername}
+            // onChangeText={(text) => {
+            //   if (text.length <= 10) {
+            //     const isValid = /^[0-9A-Za-z\u002A\u002E\u00F1\u00D1\u00D1\u00F1]*$/.test(text);
+            //     if (isValid) {
+            //       setUsername(text);
+            //     }
+            //   }
+            // }}
           />
         </View>
         <View style={styles.inputContainer}>

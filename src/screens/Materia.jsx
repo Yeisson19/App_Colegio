@@ -10,7 +10,7 @@ const Materia = () => {
   const { token } = useContext(AuthContext);
   const [materias, setMaterias] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
-// console.log(token);
+
   
   const fetchData = async () => {
     try {
