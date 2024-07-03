@@ -101,7 +101,7 @@ const NavDrawer = () => {
         // initialParams={{ userData }} // Pasar solo userData
       />
       <Drawer.Screen 
-        name="AñoScreen" 
+        name="Año Academico" 
         component={Ano_academico} 
         // initialParams={{ userData }} // Pasar solo userData
       />
