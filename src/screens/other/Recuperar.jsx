@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Alert } from 'react-native';
 import axios from 'axios';
 import { BASE_URL } from '../../services/url.jsx';
+import { Desencriptar, Encriptar } from '../../auth/authentication.jsx';
 
 const Recuperar = ({ navigation }) => {
   const [user, setUser] = useState('');
 
   const handleRecuperar = async () => {
+    const encryptedUsername = Encriptar(user); 
     try {
       const response = await axios.post(`${BASE_URL}/api/mobile/class/recuperar.php`, {
-        User: user
+        User: encryptedUsername
       });
       const data = response.data;
 
       if (data.success) {
-        console.log('Código de recuperación:', data.codigo);
         navigation.navigate('Code',{user});
       } else {
         Alert.alert('Error', data.msg);

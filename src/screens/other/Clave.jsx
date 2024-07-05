@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Alert, StyleSheet, Text } from 'react-native';
 import axios from 'axios';
 import { BASE_URL } from '../../services/url.jsx'; // Asegúrate de tener la URL base definida
+import { Desencriptar, Encriptar } from '../../auth/authentication.jsx';
 
 const Clave = ({ navigation, route }) => {
   const { user ,codigo} = route.params;
@@ -16,11 +17,14 @@ const Clave = ({ navigation, route }) => {
             return;
           }
       // Aquí puedes agregar más validaciones según tus requisitos (longitud, caracteres especiales, etc.)
+      const encryptedUsername = Encriptar(user); 
+      const encryptedNewPassword = Encriptar(newPassword); 
+      const encryptedCode = Encriptar(codigo); 
 
       const response = await axios.post(`${BASE_URL}/api/mobile/class/cambiar.php`, {
-        Usuario: user,
-        Clave: newPassword,
-        Code: codigo
+        Usuario: encryptedUsername,
+        Clave: encryptedNewPassword,
+        Code: encryptedCode
       });
    console.log(response.data);
 

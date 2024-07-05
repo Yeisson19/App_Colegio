@@ -23,7 +23,7 @@ const Login = ({ navigation }) => {
       const validationResult = validationComplete(username, password);
       if (!validationResult.isValid) throw new Error(validationResult.errorMessage);
 
-      const encryptedUsername = Encriptar(username);
+      const encryptedUsername = Encriptar(username); 
       const encryptedPassword = Encriptar(password);
 
       const response = await axios.post(`${BASE_URL}/api/login.php`, {

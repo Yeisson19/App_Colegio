@@ -3,17 +3,20 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Alert, StyleSheet, Text } from 'react-native';
 import axios from 'axios';
 import { BASE_URL } from '../../services/url'; // Asegúrate de tener la URL base definida
+import { Desencriptar, Encriptar } from '../../auth/authentication.jsx';
 
 const Codigo = ({navigation ,route}) => {
   const { user } = route.params;
   const [codigo, setCodigo] = useState('');
 
   const handleConfirmar = async () => {
-    console.log(user);
+    const encryptedUsername = Encriptar(user); 
+    const encryptedCode = Encriptar(codigo); 
+
     try {
       const response = await axios.post(`${BASE_URL}/api/mobile/class/confirmar.php`, {
-        Usuario: user,
-        Codigo: codigo,
+        Usuario: encryptedUsername,
+        Codigo: encryptedCode,
       });
  
       if (response.data.success) {
