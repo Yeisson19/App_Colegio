@@ -4,10 +4,10 @@ import { View, TextInput, Alert, StyleSheet, Text, ActivityIndicator, Dimensions
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 import { Button, Card } from 'react-native-paper';
-import validationComplete from '../utils/validator/validationUtils.jsx'; 
-import { BASE_URL } from '../services/url.jsx';
-import { Desencriptar, Encriptar } from '../auth/authentication.jsx';
-import { AuthContext } from '../context/AuthContext';
+import validationComplete from '../../utils/validator/validationUtils.jsx'; 
+import { BASE_URL } from '../../services/url.jsx';
+import { Desencriptar, Encriptar } from '../../auth/authentication.jsx';
+import { AuthContext } from '../../context/AuthContext.jsx';
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = useState('');

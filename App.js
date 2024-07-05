@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { AuthProvider, AuthContext } from './src/context/AuthContext';
-
-import Login from './src/screens/login';
+// contenido de ->/src/Routes/
+import AuthStack from './src/Routes/AuthStack'; 
 import SeccionStack from './src/Routes/navegation';
 
 const Main = () => {
@@ -12,11 +12,7 @@ const Main = () => {
 
   return (
     <>
-      {token ? (
-        <SeccionStack />
-      ) : (
-        <Login />
-      )}
+       {token ? <SeccionStack /> : <AuthStack />}
     </>
   );
 };

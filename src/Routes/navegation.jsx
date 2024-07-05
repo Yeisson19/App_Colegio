@@ -21,38 +21,6 @@ import DetailsScreen from '../screens/DetailsSeccion';
 const Drawer = createDrawerNavigator();//nav Screens
 const Stack = createNativeStackNavigator();//nav Sub-Screen
 
-//---LEER--->La Alerta tiene problema al llamarla por 2 vez.
-// const LogoutScreen = ({ navigation }) => {
-//   const { clearAuthToken } = useContext(AuthContext);
-
-//     const showAlert = () => {
-//       Alert.alert(
-//         'Confirmar cierre de sesión',
-//         '¿Estás seguro de que deseas cerrar sesión?',
-//         [
-//           {
-//             text: 'Cancelar',
-//             onPress: () => {
-//               navigation.navigate('Home');
-//             },
-//             style: 'cancel',
-//           },
-//           {
-//             text: 'Confirmar',
-//             onPress: async () => {
-//               await clearAuthToken();
-//               // navigation.navigate('Login');
-//             },
-//           },
-//         ]
-//         // { cancelable: false }
-//       );
-//     };
-
-//     showAlert();
-  
-// };
-
 const NavDrawer = () => {
 
   // Logica cerrar Seccion (elimina token)
