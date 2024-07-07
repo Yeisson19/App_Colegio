@@ -43,7 +43,7 @@ const NavDrawer = () => {
     <Drawer.Navigator 
     // initialRouteName="Seccion"
     >
-      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="INICIO" component={Home} />
       <Drawer.Screen 
         name="Materia" 
         component={Materia} 
