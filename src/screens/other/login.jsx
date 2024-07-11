@@ -33,10 +33,9 @@ const Login = ({ navigation }) => {
 
       console.log(response.data);
 
-      const entrada = Desencriptar(response.data.entrada);
       const token = Desencriptar(response.data.token);
 
-      if (entrada && token) {
+      if (response.data.entrada && token) {
         Alert.alert('¡Bienvenido!', 'Inicio de sesión exitoso');
         saveAuthToken(token);
       } else {

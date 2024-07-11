@@ -7,7 +7,7 @@ import RepositoryItem_inscripciones from '../components/RepositoryItem_inscripci
 import {BASE_URL} from '../services/url.jsx'
 import { AuthContext } from '../context/AuthContext';
 
-const inscripciones = () => {
+const Inscripciones = () => {
   const { token } = useContext(AuthContext);
   const [inscripciones, setHorarios] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -64,4 +64,4 @@ const inscripciones = () => {
 };
 
 
-export default inscripciones;
+export default Inscripciones;

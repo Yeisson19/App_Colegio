@@ -5,6 +5,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons'; // Importa el ícono de Ionicons
 import { AuthContext } from '../context/AuthContext';
 import homeIcon from '../screens/img/logo.png';
+// Nav
+import CustomDrawerContent from './CustomDrawerContent';
+// import { Avatar } from '@rneui/themed';
 // Screens
 import Home from '../screens/Home';
 import Materia from '../screens/Materia';
@@ -23,28 +26,14 @@ const Stack = createNativeStackNavigator();//nav Sub-Screen
 
 const NavDrawer = () => {
 
-  // Logica cerrar Seccion (elimina token)
-  const LogoutScreen = () => {
-    const { clearAuthToken } = useContext(AuthContext);
-  
-    React.useEffect(() => {
-      const logout = async () => {
-        await clearAuthToken();
-      };
-  
-      logout();
-    }, []);
-  
-    return null;
-  };
-  //-----------------------------------------
 
   return (
     <Drawer.Navigator 
     // initialRouteName="Seccion"
+    drawerContent={props => <CustomDrawerContent {...props} />}
     >
       <Drawer.Screen
-        name="INICIO"
+        name="Inicio"
         component={Home}
         options={{
           drawerIcon: () => (
@@ -135,20 +124,7 @@ const NavDrawer = () => {
         }}
         // initialParams={{ userData }} // Pasar solo userData
       />
-      <Drawer.Screen
-        name="CerrarSesion"
-        options={{
-          title: 'Cerrar sesión',
-          drawerIcon: ({ focused, color, size }) => (
-            <Ionicons
-              name="power"
-              size={size}
-              color={color}
-            />
-          ),
-        }}
-        component={LogoutScreen}
-        />
+      
 
         
     </Drawer.Navigator>
