@@ -8,7 +8,6 @@ import {BASE_URL} from '../services/url.jsx'
 import { AuthContext } from '../context/AuthContext';
 
 
-
 const Horario =  () => {
   const { token } = useContext(AuthContext);
   const [horarios, setHorarios] = useState([]);

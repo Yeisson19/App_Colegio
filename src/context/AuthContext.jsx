@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
       console.log('Error al borrar el token:', error);
     }
   };
-
+  // clearAuthToken();
   return (
     <AuthContext.Provider value={{ token, user, saveAuthToken, clearAuthToken }}>
       {children}

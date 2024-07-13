@@ -5,14 +5,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { AuthProvider, AuthContext } from './src/context/AuthContext';
 // contenido de ->/src/Routes/
 import AuthStack from './src/Routes/AuthStack'; 
-import SeccionStack from './src/Routes/navegation';
+import SeccionStack from './src/Routes/SeccionStack';
 
 const Main = () => {
-  const { token } = useContext(AuthContext);
+  const { user,token } = useContext(AuthContext);
 
   return (
     <>
-       {token ? <SeccionStack /> : <AuthStack />}
+       {token && user ? <SeccionStack /> : <AuthStack />}
     </>
   );
 };
