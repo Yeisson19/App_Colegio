@@ -18,6 +18,7 @@ const Codigo = ({navigation ,route}) => {
         Usuario: encryptedUsername,
         Codigo: encryptedCode,
       });
+ console.log(response.data);
  
       if (response.data.success) {
         console.log(response.data.msg); // Puedes cambiar esto para navegar a la siguiente vista
