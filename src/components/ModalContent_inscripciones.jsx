@@ -11,15 +11,15 @@ const ModalContent_inscripciones = ({ visible, onClose, 	nombre, apellido, edad 
         <View style={styles.ModalContent_inscripciones}>
           <Text style={[styles.label, styles.textCenter]}>-----DATOS inscripciones-----</Text>
           <View style={styles.row}>
-            <Text style={styles.label}>ID:</Text>
+            <Text style={styles.label}>Nombre:</Text>
             <Text style={styles.text}>{nombre}</Text>
           </View>
           <View style={styles.row}>
-            <Text style={styles.label}>Ref:</Text>
+            <Text style={styles.label}>Apellido:</Text>
             <Text style={styles.text}>{apellido}</Text>
           </View>
           <View style={styles.row}>
-            <Text style={styles.label}>Monto:</Text>
+            <Text style={styles.label}>Edad:</Text>
             <Text style={styles.text}>{edad}</Text>
           </View>
 

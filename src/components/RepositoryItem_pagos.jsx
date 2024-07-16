@@ -1,68 +1,99 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, Modal } from "react-native";
-import ModalContent_pagos from "./ModalContent_pagos";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import Collapsible from "react-native-collapsible";
 
 const RepositoryItem_pagos = (props) => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   const handlePress = () => {
-    setModalVisible(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalVisible(false);
+    setIsCollapsed(!isCollapsed);
   };
 
   return (
-    <TouchableOpacity onPress={handlePress}>
-      <View key={props.id_deudas} style={styles.container}>
+    <View style={styles.outerContainer}>
+      <TouchableOpacity onPress={handlePress} style={styles.touchable}>
+        <Text style={styles.touchableText}>Datos del Registro:</Text>
         <View style={styles.row}>
-          <Text style={styles.label}>ID:</Text>
-          <Text style={styles.text}>{props.id_deudas}</Text>
+        <View style={styles.rowItem}>
+            <Text style={styles.label}>ID:</Text>
+            <Text style={styles.text}>{props.id_deudas}</Text>
+          </View>
+          <View style={styles.rowItem}>
+            <Text style={styles.label}>Referencia:</Text>
+            <Text style={styles.text}>{props.identificador}</Text>
+          </View>
+          <View style={styles.rowItem}>
+            <Text style={styles.label}>Monto:</Text>
+            <Text style={styles.text}>{props.monto}</Text>
+          </View>
         </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Ref:</Text>
-          <Text style={styles.text}>{props.identificador}</Text>
+      </TouchableOpacity>
+      <Collapsible collapsed={isCollapsed}>
+        <View style={styles.detailsContainer}>
+          <Text style={[styles.label, styles.textCenter]}>-----Mas Detalles-----</Text>
+          <View style={styles.row}>
+            <Text style={styles.label}>ID:</Text>
+            <Text style={styles.text}>{props.id_deudas}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>Referencia:</Text>
+            <Text style={styles.text}>{props.identificador}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>Monto:</Text>
+            <Text style={styles.text}>{props.monto}</Text>
+          </View>
         </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Monto:</Text>
-          <Text style={styles.text}>{props.monto}</Text>
-        </View>
-      </View>
-      <ModalContent_pagos
-        visible={modalVisible}
-        onClose={handleCloseModal}
-        id_deudas={props.id_deudas}
-        identificador={props.identificador}
-        monto={props.monto}   
-         
-      />
-    </TouchableOpacity>
+      </Collapsible>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    padding: 13,
-    paddingRight: 95,
-    marginBottom: 1,
-    borderRadius: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  outerContainer: {
+    backgroundColor: '#BDF3D4',
+    marginBottom: 5,
+    borderRadius: 10,
+    marginHorizontal: 10,
+    overflow: 'hidden',
+    elevation: 3,
+  },
+  touchable: {
+    padding: 10,
+  },
+  touchableText: {
+    fontWeight: 'normal',
+    marginLeft: 8,
+    marginBottom: 8,
+    fontSize: 18,
   },
   row: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: 10,
+  },
+  cell: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 3,
   },
   label: {
     fontWeight: 'bold',
     marginRight: 5,
-    marginLeft: 10,
   },
   text: {
     fontSize: 16,
   },
+  textCenter: {
+    textAlign: 'center',
+    width: '100%',
+  },
+  detailsContainer: {
+    padding: 10,
+    backgroundColor: '#EAF7F1',
+  },
 });
 
 export default RepositoryItem_pagos;
+
