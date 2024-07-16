@@ -3,9 +3,9 @@ import { FlatList, Text, View, StyleSheet, RefreshControl, TextInput } from "rea
 import axios from 'axios';
 import Constants from 'expo-constants';
 
-import RepositoryItem_inscripciones from '../components/RepositoryItem_inscripciones.jsx'
-import {BASE_URL} from '../services/url.jsx'
-import { AuthContext } from '../context/AuthContext.jsx';
+import RepositoryItem_inscripciones from '../components/RepositoryItem_inscripciones';
+import { BASE_URL } from '../services/url.jsx';
+import { AuthContext } from '../context/AuthContext';
 
 const Inscripciones = () => {
   const { token } = useContext(AuthContext);
