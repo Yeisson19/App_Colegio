@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
-import { FlatList, Text, View, StyleSheet, RefreshControl, TextInput } from "react-native";
+import React, { useEffect, useState, useContext, useCallback} from "react";
+import { FlatList, Text, View, StyleSheet, RefreshControl, TextInput, Alert } from "react-native";
 import axios from 'axios';
 import Constants from 'expo-constants';
+import { useFocusEffect } from '@react-navigation/native';
 
 import RepositoryItem_pagos from '../components/RepositoryItem_pagos';
 import { BASE_URL } from '../services/url.jsx';
@@ -42,12 +43,19 @@ const Pagos = () => {
   useEffect(() => {
     if (searchQuery) {
       setFilteredPayments(pagos.filter(payment => 
-        payment.id_deudas.toString().includes(searchQuery)
+        payment.id_deudas && payment.identificador.toString().includes(searchQuery)
       ));
     } else {
       setFilteredPayments(pagos);
     }
   }, [searchQuery, pagos]);
+
+  useFocusEffect(
+    useCallback(() => {
+      // Limpia el campo de búsqueda cuando la pantalla gana el foco
+      setSearchQuery('');
+    }, [])
+  );
 
   const handleRefresh = () => {
     fetchData();

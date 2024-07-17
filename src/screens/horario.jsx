@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import { FlatList, Text, View, StyleSheet, RefreshControl, TextInput, Alert } from "react-native";
 import axios from 'axios';
 import Constants from 'expo-constants';
+import { useFocusEffect } from '@react-navigation/native';
 
 import RepositoryItem_horario from '../components/RepositoryItem_horario';
 import { BASE_URL } from '../services/url.jsx';
@@ -48,6 +49,13 @@ const Horarios = () => {
       setFilteredHorarios(horarios);
     }
   }, [searchQuery, horarios]);
+
+  useFocusEffect(
+    useCallback(() => {
+      // Limpia el campo de búsqueda cuando la pantalla gana el foco
+      setSearchQuery('');
+    }, [])
+  );
 
   const handleRefresh = () => {
     fetchData();
