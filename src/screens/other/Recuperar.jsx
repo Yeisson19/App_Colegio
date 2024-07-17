@@ -14,7 +14,7 @@ const Recuperar = ({ navigation }) => {
         User: encryptedUsername
       });
       const data = response.data;
-
+      console.log(data);
       if (data.success) {
         navigation.navigate('Code',{user});
       } else {
