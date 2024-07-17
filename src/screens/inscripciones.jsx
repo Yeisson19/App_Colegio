@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import { FlatList, Text, View, StyleSheet, RefreshControl, TextInput } from "react-native";
 import axios from 'axios';
 import Constants from 'expo-constants';
+import { useFocusEffect } from '@react-navigation/native';
 
 import RepositoryItem_inscripciones from '../components/RepositoryItem_inscripciones';
 import { BASE_URL } from '../services/url.jsx';
@@ -44,12 +45,19 @@ const Inscripciones = () => {
     // Filtrar inscripciones basado en searchQuery
     if (searchQuery) {
       setFilteredInscriptions(inscripciones.filter(inscripcion =>
-        inscripcion.cedula && inscripcion.cedula.toString().includes(searchQuery)
+        inscripcion.cedula && inscripcion.nombre && inscripcion.apellido.toString().includes(searchQuery)
       ));
     } else {
       setFilteredInscriptions(inscripciones);
     }
   }, [searchQuery, inscripciones]);
+
+  useFocusEffect(
+    useCallback(() => {
+      // Limpia el campo de búsqueda cuando la pantalla gana el foco
+      setSearchQuery('');
+    }, [])
+  );
 
   const handleRefresh = () => {
     fetchData();

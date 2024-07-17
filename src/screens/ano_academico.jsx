@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import { FlatList, Text, View, StyleSheet, RefreshControl, TextInput } from "react-native";
 import axios from 'axios';
 import Constants from 'expo-constants';
+import { useFocusEffect } from '@react-navigation/native';
 
 import RepositoryItem_ano_academico from '../components/RepositoryItem_ano_academico';
 import { BASE_URL } from '../services/url.jsx';
@@ -42,13 +43,20 @@ const Ano_academico = () => {
   useEffect(() => {
     if (searchQuery) {
       const filteredData = ano_academico.filter(year => 
-        year.id.toString().toLowerCase().includes(searchQuery.toLowerCase())
+        year.id && year.ano_academico.toString().toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredYears(filteredData);
     } else {
       setFilteredYears(ano_academico);
     }
   }, [searchQuery, ano_academico]);
+
+  useFocusEffect(
+    useCallback(() => {
+      // Limpia el campo de búsqueda cuando la pantalla gana el foco
+      setSearchQuery('');
+    }, [])
+  );
 
   const handleRefresh = () => {
     fetchData();
