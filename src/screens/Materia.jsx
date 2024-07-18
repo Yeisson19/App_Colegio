@@ -22,7 +22,7 @@ const Materias = () => {
         token: token
       });
 
-      console.log(response.data);
+      console.log(response.data.resultado);
       if (response.data.success) {
         setMaterias(response.data.resultado);
         setFilteredMaterias(response.data.resultado);
@@ -43,7 +43,7 @@ const Materias = () => {
   useEffect(() => {
     if (searchQuery) {
       setFilteredMaterias(materias.filter(materia => 
-        materia.id.toString().includes(searchQuery)
+        materia.id_materias.toString().includes(searchQuery)
       ));
     } else {
       setFilteredMaterias(materias);
