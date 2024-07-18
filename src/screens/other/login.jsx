@@ -4,7 +4,8 @@ import { View, TextInput, Alert, StyleSheet, Text, ActivityIndicator, Dimensions
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 import { Button, Card } from 'react-native-paper';
-import validationComplete from '../../utils/validator/validationUtils.jsx'; 
+import validationComplete from '../../utils/validator/validationUtils.jsx';
+import { validateUsername,validatePassword } from '../../utils/validator/validation.jsx'; 
 import { BASE_URL } from '../../services/url.jsx';
 import { Desencriptar, Encriptar } from '../../auth/authentication.jsx';
 import { AuthContext } from '../../context/AuthContext.jsx';
@@ -13,6 +14,8 @@ const Login = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [usernameBorderColor, setUsernameBorderColor] = useState('#ccc');
+  const [passwordBorderColor, setPasswordBorderColor] = useState('#ccc');
   const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar contraseña
   const { saveAuthToken } = useContext(AuthContext);
 
@@ -48,7 +51,17 @@ const Login = ({ navigation }) => {
 
     setIsLoading(false);
   };
+  //Cambio de color a los input
+  const handleUsernameChange = (text) => {
+    setUsername(text);
+    setUsernameBorderColor(validateUsername(text) ? 'green' : 'red');
+  };
 
+  const handlePasswordChange = (text) => {
+    setPassword(text);
+    setPasswordBorderColor(validatePassword(text) ? 'green' : 'red');
+  };
+  //Ver Contraseña
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -62,19 +75,20 @@ const Login = ({ navigation }) => {
         <Text style={styles.title}>Login</Text>
         <Text style={styles.subtitle}>Por favor inicia sesión para continuar.</Text>
         <Card style={styles.card}>
-          <View style={styles.inputContainer}>
+        <View style={[styles.inputContainer, { borderColor: usernameBorderColor }]}>
             <Ionicons name="person" size={18} color="black" style={styles.icon} />
             <TextInput
               style={styles.input}
               placeholder="Usuario"
               placeholderTextColor="#a0a0a0"
               value={username}
-              onChangeText={setUsername}
+              onChangeText={handleUsernameChange}
+              // onChangeText={setUsername}
               selectionColor="#06BE99" // Color del cursor
               underlineColorAndroid="transparent" // Oculta la línea de abajo en Android
             />
           </View>
-          <View style={styles.inputContainer}>
+          <View style={[styles.inputContainer, { borderColor: passwordBorderColor }]}>
             <Ionicons name="lock-closed" size={18} color="black" style={styles.icon} />
             <TextInput
               style={styles.input}
@@ -82,7 +96,8 @@ const Login = ({ navigation }) => {
               placeholderTextColor="#a0a0a0"
               secureTextEntry={!showPassword} // Mostrar u ocultar contraseña según estado
               value={password}
-              onChangeText={setPassword}
+              onChangeText={handlePasswordChange}
+              // onChangeText={setPassword}
               selectionColor="#06BE99" // Color del cursor
               underlineColorAndroid="transparent" // Oculta la línea de abajo en Android
             />
