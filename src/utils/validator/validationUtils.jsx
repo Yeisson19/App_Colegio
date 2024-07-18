@@ -13,9 +13,9 @@ function validationComplete(username, password) {
     if (!isUsernameValid && !isPasswordValid) {
       errorMessage = 'El formato del usuario y la contraseña no son correctos.';
     } else if (!isUsernameValid) {
-      errorMessage = 'El formato del usuario no es correcto.';
+      !username ? errorMessage = 'Usuario vacio' : errorMessage = 'formato del usuario no es correcto.';
     } else {
-      errorMessage = 'El formato de la contraseña no es correcto.';
+      !password ? errorMessage = 'Contraseña vacio' : errorMessage = 'formato de contraseña no es correcto.';
     }
 
     return { isValid: false, errorMessage };

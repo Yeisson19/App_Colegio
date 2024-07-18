@@ -5,13 +5,21 @@ import axios from 'axios';
 import { Button, Card } from 'react-native-paper';
 import { BASE_URL } from '../../services/url.jsx';
 import { Encriptar } from '../../auth/authentication.jsx';
+import validationComplete from '../../utils/validator/validationUtils.jsx';
+import { validateUsername } from '../../utils/validator/validation.jsx'; 
 
 const Recuperar = ({ navigation }) => {
   const [user, setUser] = useState('');
+  const passwordTemporal='olvido*01';
+  const [usernameBorderColor, setUsernameBorderColor] = useState('#ccc');
 
   const handleRecuperar = async () => {
-    const encryptedUsername = Encriptar(user); 
     try {
+      const validationResult = validationComplete(user, passwordTemporal);
+      if (!validationResult.isValid) throw new Error(validationResult.errorMessage);
+      
+      const encryptedUsername = Encriptar(user); 
+
       const response = await axios.post(`${BASE_URL}/api/mobile/class/recuperar.php`, {
         User: encryptedUsername
       });
@@ -23,9 +31,15 @@ const Recuperar = ({ navigation }) => {
         Alert.alert('Error', data.msg);
       }
     } catch (error) {
-      console.error('Error al recuperar la contraseña:', error);
-      Alert.alert('Error', 'Ocurrió un error al recuperar la contraseña.');
+      console.error(error.message);
+      // Alert.alert('Error', error.message);
     }
+  };
+
+   //Cambio de color a los input
+   const handleUsernameChange = (text) => {
+    setUser(text);
+    setUsernameBorderColor(validateUsername(text) ? 'green' : 'red');
   };
 
   return (
@@ -37,14 +51,14 @@ const Recuperar = ({ navigation }) => {
         <Text style={styles.title}>Recuperar Contraseña</Text>
         <Text style={styles.subtitle}>Ingresa tu nombre de usuario para recuperar tu contraseña.</Text>
         <Card style={styles.card}>
-          <View style={styles.inputContainer}>
+        <View style={[styles.inputContainer, { borderColor: usernameBorderColor }]}>
             <Ionicons name="person" size={18} color="black" style={styles.icon} />
             <TextInput
               style={styles.input}
               placeholder="Nombre de usuario"
               placeholderTextColor="#a0a0a0"
               value={user}
-              onChangeText={setUser}
+              onChangeText={handleUsernameChange}
               selectionColor="#06BE99" // Color del cursor
               underlineColorAndroid="transparent" // Oculta la línea de abajo en Android
             />

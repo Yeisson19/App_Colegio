@@ -1,14 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TextInput, Alert, StyleSheet, Text, Dimensions, KeyboardAvoidingView, Platform } from 'react-native';
 import axios from 'axios';
 import { Button, Card } from 'react-native-paper';
 import { BASE_URL } from '../../services/url.jsx';
 import { Encriptar } from '../../auth/authentication.jsx';
+import validationComplete from '../../utils/validator/validationUtils.jsx';
+import { validatePassword } from '../../utils/validator/validation.jsx'; 
 
 const Clave = ({ navigation, route }) => {
   const { user, codigo } = route.params;
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [newPasswordBorderColor, setNewPasswordBorderColor] = useState('#ccc');
+  const [confirmPasswordBorderColor, setConfirmPasswordBorderColor] = useState('#ccc');
+  const [timeLeft, setTimeLeft] = useState(180); // 3 minutos = 180 segundos
+
+  useEffect(() => {
+    if (timeLeft === 0) {
+      Alert.alert('Tiempo agotado', 'El tiempo ha expirado. Volviendo a la pantalla de inicio de sesión.');
+      navigation.navigate('Login');
+    }
+    
+    const timer = setTimeout(() => {
+      setTimeLeft(timeLeft - 1);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [timeLeft]);
 
   const handleChangePassword = async () => {
     if (newPassword !== confirmPassword) {
@@ -16,11 +34,14 @@ const Clave = ({ navigation, route }) => {
       return;
     }
 
-    const encryptedUsername = Encriptar(user);
-    const encryptedNewPassword = Encriptar(newPassword);
-    const encryptedCode = Encriptar(codigo);
-
     try {
+      const validationResult = validationComplete(user, newPassword);
+      if (!validationResult.isValid) throw new Error(validationResult.errorMessage);
+
+      const encryptedUsername = Encriptar(user);
+      const encryptedNewPassword = Encriptar(newPassword);
+      const encryptedCode = Encriptar(codigo);
+
       const response = await axios.post(`${BASE_URL}/api/mobile/class/cambiar.php`, {
         Usuario: encryptedUsername,
         Clave: encryptedNewPassword,
@@ -36,9 +57,19 @@ const Clave = ({ navigation, route }) => {
         Alert.alert('Error', response.data.msg);
       }
     } catch (error) {
-      console.error('Error al cambiar la contraseña:', error.message);
+      console.error(error.message);
       Alert.alert('Error', 'Ocurrió un error al cambiar la contraseña.');
     }
+  };
+
+  const handleNewPasswordChange = (text) => {
+    setNewPassword(text);
+    setNewPasswordBorderColor(validatePassword(text) ? 'green' : 'red');
+  };
+
+  const handleConfirmPasswordChange = (text) => {
+    setConfirmPassword(text);
+    setConfirmPasswordBorderColor(text === newPassword ? 'green' : 'red');
   };
 
   return (
@@ -50,18 +81,18 @@ const Clave = ({ navigation, route }) => {
         <Text style={styles.title}>Cambiar Contraseña (4-10 caracteres)</Text>
         <Card style={styles.card}>
           <TextInput
-            style={styles.input}
+            style={[styles.input, { borderColor: newPasswordBorderColor }]}
             placeholder="Nueva Contraseña"
             secureTextEntry={true}
             value={newPassword}
-            onChangeText={setNewPassword}
+            onChangeText={handleNewPasswordChange}
           />
           <TextInput
-            style={styles.input}
+            style={[styles.input, { borderColor: confirmPasswordBorderColor }]}
             placeholder="Confirmar Contraseña"
             secureTextEntry={true}
             value={confirmPassword}
-            onChangeText={setConfirmPassword}
+            onChangeText={handleConfirmPasswordChange}
           />
           <Button 
             mode="contained" 
@@ -73,6 +104,9 @@ const Clave = ({ navigation, route }) => {
             Guardar
           </Button>
         </Card>
+        <Text style={styles.timer}>
+          Tiempo restante: {Math.floor(timeLeft / 60)}:{('0' + (timeLeft % 60)).slice(-2)}
+        </Text>
       </View>
     </KeyboardAvoidingView>
   );
@@ -106,7 +140,6 @@ const styles = StyleSheet.create({
   },
   input: {
     height: windowWidth * 0.12,
-    borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 10,
     fontSize: windowWidth * 0.045,
@@ -125,6 +158,13 @@ const styles = StyleSheet.create({
   },
   saveButtonText: {
     fontSize: windowWidth * 0.045,
+  },
+  timer: {
+    marginTop: windowHeight * 0.02,
+    fontSize: windowWidth * 0.05,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#06BE99',
   },
 });
 

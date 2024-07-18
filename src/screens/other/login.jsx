@@ -8,7 +8,7 @@ import validationComplete from '../../utils/validator/validationUtils.jsx';
 import { validateUsername,validatePassword } from '../../utils/validator/validation.jsx'; 
 import { BASE_URL } from '../../services/url.jsx';
 import { Desencriptar, Encriptar } from '../../auth/authentication.jsx';
-import { AuthContext } from '../../context/AuthContext.jsx';
+import { AuthContext } from '../../context/AuthContext.jsx'; 
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -45,8 +45,9 @@ const Login = ({ navigation }) => {
         console.warn(response.data.msg);
       }
     } catch (error) {
-      console.error('Error de inicio de sesión:', error.message);
-      Alert.alert('Error', 'Inicio de sesión fallido. Verifica tus credenciales.');
+      console.error(error.message);
+      // console.error('Error de inicio de sesión:', error.message);
+      // Alert.alert('Error', 'Inicio de sesión fallido. Verifica tus credenciales.');
     }
 
     setIsLoading(false);
