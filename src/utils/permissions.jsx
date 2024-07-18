@@ -1,7 +1,7 @@
 export const rolePermissions = {
     Tutor: ['Inicio', 'Pagos'],
     Docente: ['Inicio', 'Seccion', 'Horario', 'Inscripciones', 'Año Academico'],
-    Admin: ['Inicio', 'Materia', 'Seccion', 'Horario', 'Pagos', 'Inscripciones', 'Año Academico'],
+    Admin: ['Inicio', 'Materia', 'Seccion', 'Horario', 'Pagos', 'Inscripciones', 'Año Academico','Reporte']
   };
 
   export const getUserRole = (role) => {

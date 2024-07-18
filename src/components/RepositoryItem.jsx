@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity ,FlatList} from "react-native";
 import Collapsible from "react-native-collapsible";
 
 const RepositoryItem = (props) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
-
+  const docentes = props.docente_nombre_apellido.split(',');
   const handlePress = () => {
     setIsCollapsed(!isCollapsed);
   };
@@ -16,15 +16,15 @@ const RepositoryItem = (props) => {
         <View style={styles.row}>
         <View style={styles.rowItem}>
             <Text style={styles.label}>ID:</Text>
-            <Text style={styles.text}>{props.id}</Text>
+            <Text style={styles.text}>{props.id_materias}</Text>
           </View>
           <View style={styles.rowItem}>
             <Text style={styles.label}>Materia:</Text>
-            <Text style={styles.text}>{props.nombre}</Text>
+            <Text style={styles.text}>{props.materias}</Text>
           </View>
           <View style={styles.rowItem}>
-            <Text style={styles.label}>Estado:</Text>
-            <Text style={styles.text}>{props.estado}</Text>
+            <Text style={styles.label}>Año:</Text>
+            <Text style={styles.text}>{props.id_anos}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -32,16 +32,14 @@ const RepositoryItem = (props) => {
         <View style={styles.detailsContainer}>
           <Text style={[styles.label, styles.textCenter]}>-----Mas Detalles-----</Text>
           <View style={styles.row}>
-            <Text style={styles.label}>ID:</Text>
-            <Text style={styles.text}>{props.id}</Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={styles.label}>Materia:</Text>
-            <Text style={styles.text}>{props.nombre}</Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={styles.label}>Estado:</Text>
-            <Text style={styles.text}>{props.estado}</Text>
+            <Text style={styles.label}>Docentes:</Text>
+            <FlatList
+              data={docentes}
+              renderItem={({ item }) => (
+                <Text style={styles.text}>{item.trim()}</Text>
+              )}
+              keyExtractor={(item, index) => index.toString()}
+            />
           </View>
         </View>
       </Collapsible>
