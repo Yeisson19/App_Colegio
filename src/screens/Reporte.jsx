@@ -13,13 +13,14 @@ const Reportes = () => {
   const fetchData = async () => {
     try {
       setIsRefreshing(true);
-      const response = await axios.post(`${BASE_URL}/api/mobile/reporte.php`, {
+      const response = await axios.post(`${BASE_URL}/api/mobile/reporte_inscripcion.php`, {
         token: token
       });
 
-      console.log(response.data.resultado);
+      console.log(response.data.reportes);
       if (response.data.success) {
-        setReportes(response.data.resultado);
+        // setReportes(response.data.reportes);
+        setReportes(response.data.reportes || {});
       } else {
         Alert.alert('Error', response.data.msg || 'Error al obtener datos');
       }
@@ -45,10 +46,10 @@ const Reportes = () => {
         <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
       }
     >
-      <Text style={styles.title}>Reportes</Text>
+      <Text style={styles.title}>Reportes Incripciones</Text>
       {Object.entries(reportes).map(([key, value]) => (
         <View key={key} style={styles.reportItem}>
-          <Text style={styles.reportLabel}>{key}:</Text>
+          <Text style={styles.reportLabel}>Estudiantes Inscritos {key} Año:</Text>
           <Text style={styles.reportValue}>{value}</Text>
         </View>
       ))}
@@ -79,10 +80,10 @@ const styles = StyleSheet.create({
   },
   reportLabel: {
     fontSize: 18,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
   },
   reportValue: {
-    fontSize: 18,
+    fontSize: 15,
     color: '#333',
   },
 });
