@@ -42,10 +42,10 @@ const Ano_academico = () => {
 
   useEffect(() => {
     if (searchQuery) {
-      const filteredData = ano_academico.filter(year => 
-        year.id && year.ano_academico.toString().toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredYears(filteredData);
+      setFilteredPayments(ano_academico.filter(years => 
+        (years.id && years.id.toString().includes(searchQuery)) ||
+        (years.nombre && years.nombre.toString().includes(searchQuery))
+      ));
     } else {
       setFilteredYears(ano_academico);
     }

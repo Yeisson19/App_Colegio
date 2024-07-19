@@ -43,7 +43,7 @@ const Materias = () => {
   useEffect(() => {
     if (searchQuery) {
       setFilteredMaterias(materias.filter(materia => 
-        materia.id_materias.toString().includes(searchQuery)
+        materia.id_materias && materia.id_materias.toString().includes(searchQuery)
       ));
     } else {
       setFilteredMaterias(materias);

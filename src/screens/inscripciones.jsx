@@ -45,7 +45,9 @@ const Inscripciones = () => {
     // Filtrar inscripciones basado en searchQuery
     if (searchQuery) {
       setFilteredInscriptions(inscripciones.filter(inscripcion =>
-        inscripcion.cedula && inscripcion.nombre && inscripcion.apellido.toString().includes(searchQuery)
+        (inscripcion.cedula && inscripcion.cedula.toString().includes(searchQuery)) ||
+        (inscripcion.nombre && inscripcion.nombre.toString().includes(searchQuery)) ||
+        (inscripcion.apellido && inscripcion.apellido.toString().includes(searchQuery))
       ));
     } else {
       setFilteredInscriptions(inscripciones);

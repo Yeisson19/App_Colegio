@@ -43,13 +43,14 @@ const Pagos = () => {
   useEffect(() => {
     if (searchQuery) {
       setFilteredPayments(pagos.filter(payment => 
-        payment.id_deudas && payment.identificador.toString().includes(searchQuery)
+        (payment.id_deudas && payment.id_deudas.toString().includes(searchQuery)) ||
+        (payment.identificador && payment.identificador.toString().includes(searchQuery))
       ));
     } else {
       setFilteredPayments(pagos);
     }
   }, [searchQuery, pagos]);
-
+  
   useFocusEffect(
     useCallback(() => {
       // Limpia el campo de búsqueda cuando la pantalla gana el foco

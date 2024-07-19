@@ -43,7 +43,9 @@ const Horarios = () => {
   useEffect(() => {
     if (searchQuery) {
       setFilteredHorarios(horarios.filter(horario =>
-        horario.id.toString().includes(searchQuery)
+        (horario.id && horario.id.toString().includes(searchQuery)) ||
+        (horario.clase && horario.clase.toString().includes(searchQuery)) ||
+        (horario.cedula && horario.cedula.toString().includes(searchQuery))
       ));
     } else {
       setFilteredHorarios(horarios);
