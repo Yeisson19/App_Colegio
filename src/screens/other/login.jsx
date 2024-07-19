@@ -39,7 +39,7 @@ const Login = ({ navigation }) => {
       const token = Desencriptar(response.data.token);
 
       if (response.data.entrada && token) {
-        Alert.alert('¡Bienvenido!', 'Inicio de sesión exitoso');
+        // Alert.alert('¡Bienvenido!', 'Inicio de sesión exitoso');
         saveAuthToken(token);
       } else {
         console.warn(response.data.msg);
