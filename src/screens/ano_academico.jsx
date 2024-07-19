@@ -11,7 +11,7 @@ import { AuthContext } from '../context/AuthContext';
 const Ano_academico = () => {
   const { token } = useContext(AuthContext);
   const [ano_academico, setAno_academico] = useState([]);
-  const [filteredYears, setFilteredYears] = useState([]);
+  const [filteredYears, setFilteredYears] = useState([ano_academico]);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -42,9 +42,10 @@ const Ano_academico = () => {
 
   useEffect(() => {
     if (searchQuery) {
-      setFilteredPayments(ano_academico.filter(years => 
-        (years.id && years.id.toString().includes(searchQuery)) ||
-        (years.nombre && years.nombre.toString().includes(searchQuery))
+      setFilteredYears(ano_academico.filter(year => 
+        (year.id && year.id.toString().includes(searchQuery)) ||
+        (year.estatus && year.estatus.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (year.ano_academico && year.ano_academico.toLowerCase().includes(searchQuery.toLowerCase()))
       ));
     } else {
       setFilteredYears(ano_academico);

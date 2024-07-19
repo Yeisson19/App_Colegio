@@ -11,7 +11,7 @@ import { AuthContext } from '../context/AuthContext';
 const Pagos = () => {
   const { token } = useContext(AuthContext);
   const [pagos, setPagos] = useState([]);
-  const [filteredPayments, setFilteredPayments] = useState([]);
+  const [filteredPayments, setFilteredPayments] = useState([pagos]);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
