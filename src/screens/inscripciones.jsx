@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useCallback } from "react";
-import { FlatList, Text, View, StyleSheet, RefreshControl, TextInput } from "react-native";
+import { FlatList, Text, View, StyleSheet, RefreshControl, TextInput, Alert } from "react-native";
 import axios from 'axios';
 import Constants from 'expo-constants';
 import { useFocusEffect } from '@react-navigation/native';
@@ -11,7 +11,7 @@ import { AuthContext } from '../context/AuthContext';
 const Inscripciones = () => {
   const { token } = useContext(AuthContext);
   const [inscripciones, setInscripciones] = useState([]);
-  const [filteredInscriptions, setFilteredInscriptions] = useState([]);
+  const [filteredInscriptions, setFilteredInscriptions] = useState([inscripciones]); // Cambiar a un arreglo vacío
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -45,9 +45,9 @@ const Inscripciones = () => {
     // Filtrar inscripciones basado en searchQuery
     if (searchQuery) {
       setFilteredInscriptions(inscripciones.filter(inscripcion =>
-        (inscripcion.cedula && inscripcion.cedula.toString().includes(searchQuery)) ||
-        (inscripcion.nombre && inscripcion.nombre.toString().includes(searchQuery)) ||
-        (inscripcion.apellido && inscripcion.apellido.toString().includes(searchQuery))
+        (inscripcion.cedula && inscripcion.cedula.includes(searchQuery)) ||
+        (inscripcion.nombre && inscripcion.nombre.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (inscripcion.apellido && inscripcion.apellido.toLowerCase().includes(searchQuery.toLowerCase())) 
       ));
     } else {
       setFilteredInscriptions(inscripciones);
@@ -75,6 +75,7 @@ const Inscripciones = () => {
       />
       <FlatList
         data={filteredInscriptions}
+        keyExtractor={(item) => item.cedula.toString()} // Asegúrate de tener una clave única para cada elemento
         ItemSeparatorComponent={() => <Text> </Text>}
         renderItem={({ item: repo }) => (
           <RepositoryItem_inscripciones {...repo} />
@@ -104,4 +105,3 @@ const styles = StyleSheet.create({
 });
 
 export default Inscripciones;
-

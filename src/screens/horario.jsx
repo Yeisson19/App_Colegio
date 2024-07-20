@@ -11,7 +11,7 @@ import { AuthContext } from '../context/AuthContext';
 const Horarios = () => {
   const { token } = useContext(AuthContext);
   const [horarios, setHorarios] = useState([]);
-  const [filteredHorarios, setFilteredHorarios] = useState([]);
+  const [filteredHorarios, setFilteredHorarios] = useState([horarios]);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -44,8 +44,7 @@ const Horarios = () => {
     if (searchQuery) {
       setFilteredHorarios(horarios.filter(horario =>
         (horario.id && horario.id.toString().includes(searchQuery)) ||
-        (horario.clase && horario.clase.toString().includes(searchQuery)) ||
-        (horario.cedula && horario.cedula.toString().includes(searchQuery))
+        (horario.clase && horario.clase.toLowerCase().includes(searchQuery.toLowerCase()))
       ));
     } else {
       setFilteredHorarios(horarios);
