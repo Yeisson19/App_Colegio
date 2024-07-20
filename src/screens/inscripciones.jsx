@@ -11,7 +11,7 @@ import { AuthContext } from '../context/AuthContext';
 const Inscripciones = () => {
   const { token } = useContext(AuthContext);
   const [inscripciones, setInscripciones] = useState([]);
-  const [filteredInscriptions, setFilteredInscriptions] = useState([inscripciones]); // Cambiar a un arreglo vacío
+  const [filteredInscriptions, setFilteredInscriptions] = useState([]); // Cambiar a un arreglo vacío
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
