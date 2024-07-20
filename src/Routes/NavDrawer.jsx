@@ -11,7 +11,8 @@ import Horario from '../screens/horario';
 import Pagos from '../screens/Pagos';
 import Inscripciones from '../screens/inscripciones';
 import Ano_academico from '../screens/ano_academico';
-import Reportes from '../screens/Reporte';
+import Reportes from '../screens/Reporte_inscripcion';
+import Reporte_Pagos from '../screens/Reporte_pagos';
 
 import {rolePermissions, getUserRole } from '../utils/permissions';
 
@@ -31,7 +32,8 @@ const NavDrawer = () => {
     { name: 'Pagos', component: Pagos, icon: 'card' },
     { name: 'Inscripciones', component: Inscripciones, icon: 'person' },
     { name: 'Año Academico', component: Ano_academico, icon: 'calendar' },
-    { name: 'Reporte', component: Reportes, icon: 'library' }
+    { name: 'Reporte Inscripcion', component: Reportes, icon: 'analytics' },
+    { name: 'Reporte Pago', component: Reporte_Pagos, icon: 'cash' }
   ].filter(screen => allowedScreens.includes(screen.name));
 
   return (
