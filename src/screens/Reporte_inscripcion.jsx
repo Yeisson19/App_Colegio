@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Text, View, StyleSheet, RefreshControl, Alert, ScrollView } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 import Constants from 'expo-constants';
 import { BASE_URL } from '../services/url.jsx';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext.jsx';
 
 const Reportes = () => {
   const { token } = useContext(AuthContext);
@@ -19,7 +20,6 @@ const Reportes = () => {
 
       console.log(response.data.reportes);
       if (response.data.success) {
-        // setReportes(response.data.reportes);
         setReportes(response.data.reportes || {});
       } else {
         Alert.alert('Error', response.data.msg || 'Error al obtener datos');
@@ -46,11 +46,14 @@ const Reportes = () => {
         <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
       }
     >
-      <Text style={styles.title}>Reportes Incripciones</Text>
+      <Text style={styles.title}>Reportes de Inscripciones</Text>
       {Object.entries(reportes).map(([key, value]) => (
         <View key={key} style={styles.reportItem}>
-          <Text style={styles.reportLabel}>Estudiantes Inscritos {key} Año:</Text>
-          <Text style={styles.reportValue}>{value}</Text>
+          <Ionicons name="school" size={24} color="#10b981" />
+          <View style={styles.reportContent}>
+            <Text style={styles.reportLabel}>Estudiantes Inscritos {key} Año:</Text>
+            <Text style={styles.reportValue}>{value}</Text>
+          </View>
         </View>
       ))}
     </ScrollView>
@@ -61,30 +64,35 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 20,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#f9fafb',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
+    color: '#1f2937',
   },
   reportItem: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 10,
     backgroundColor: '#fff',
-    borderRadius: 5,
+    borderRadius: 8,
     marginBottom: 10,
     elevation: 2,
   },
+  reportContent: {
+    marginLeft: 10,
+  },
   reportLabel: {
     fontSize: 18,
-    // fontWeight: 'bold',
+    color: '#4b5563',
   },
   reportValue: {
     fontSize: 15,
-    color: '#333',
+    color: '#1f2937',
+    fontWeight: 'bold',
   },
 });
 
