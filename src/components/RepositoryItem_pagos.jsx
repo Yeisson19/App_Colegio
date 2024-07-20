@@ -29,7 +29,7 @@ const RepositoryItem_pagos = (props) => {
         </View>
       </TouchableOpacity>
       <Collapsible collapsed={isCollapsed}>
-        <View style={styles.detailsContainer}>
+      <View style={styles.detailsContainer}>
           <Text style={[styles.label, styles.textCenter]}>-----Mas Detalles-----</Text>
           <View style={styles.row}>
             <Text style={styles.label}>ID:</Text>
@@ -40,8 +40,25 @@ const RepositoryItem_pagos = (props) => {
             <Text style={styles.text}>{props.identificador}</Text>
           </View>
           <View style={styles.row}>
+            <Text style={styles.label}>Concepto:</Text>
+            <Text style={styles.text}>{props.concepto}</Text>
+          </View>  
+          <View style={styles.row}>
+            <Text style={styles.label}>Fecha:</Text>
+            <Text style={styles.text}>{props.fecha}</Text>
+          </View>  
+          <View style={styles.row}>
+            <Text style={styles.label}>Forma:</Text>
+            <Text style={styles.text}>{props.forma}</Text>
+          </View>
+          <View style={styles.row}>
             <Text style={styles.label}>Monto:</Text>
             <Text style={styles.text}>{props.monto}</Text>
+          </View>
+          <Text style={[styles.label, styles.textCenter]}>-----------------------------------------------------------</Text>
+          <View style={styles.row}>
+            <Text style={styles.label}>Estado:</Text>
+            <Text style={styles.text}>{props.estado}</Text>
           </View>
         </View>
       </Collapsible>
